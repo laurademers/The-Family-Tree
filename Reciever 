@@ -1,0 +1,40 @@
+import oscP5.*;
+import netP5.*;
+PImage Sandra;
+
+OscP5 osc;
+void setup() {
+  Sandra = loadImage("AuntySandra.jpg");
+  size(600, 600);
+  background(0);
+  osc = new OscP5(this, 1235); // listen on port 1243  
+ // osc.plug(this, "mouseData", "/mouse");
+
+}
+
+//void mouseData(int mx, int my) {
+// ellipse(mx, my, 50, 50);
+//}
+
+void oscEvent( OscMessage msg ) {
+  println(msg.addrPattern()); 
+  if (msg.addrPattern().equals("/key")) {
+
+
+    String s = msg.get(0).stringValue();
+    fill(255);
+    background(0);
+    PFont font;
+    font = loadFont("Univers45.vlw");
+    textFont(font, 27);
+    text(s, width/8, 500);
+
+    println(s);
+    
+  }
+}
+
+
+void draw() {
+      image(Sandra,width/8,0);
+}
